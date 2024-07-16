@@ -1,0 +1,11 @@
+name: Feature Suggestion
+description: Suggest a new feature
+labels: ["suggestion"]
+projects: ["idn-au/3"]
+body:
+- type: textarea
+  attributes:
+    label: Describe the suggested feature
+    description: A description of the suggestion.
+  validations:
+    required: false

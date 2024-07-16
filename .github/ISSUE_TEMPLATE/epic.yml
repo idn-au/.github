@@ -1,0 +1,21 @@
+name: Epic
+description: Create a large strategic objective that will encapsulate multiple tasks
+title: "[Epic] <title>"
+labels: ["epic"]
+projects: ["idn-au/3"]
+body:
+- type: textarea
+  attributes:
+    label: Epic description
+    description: A description of the epic.
+  validations:
+    required: false
+- type: textarea
+  attributes:
+    label: Tasks
+    description: A checklist of tasks that this epic contains
+    placeholder: |
+      - [] #1
+      - [] <link-to-issue>
+  validations:
+    required: false

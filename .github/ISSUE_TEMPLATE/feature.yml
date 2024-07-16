@@ -1,0 +1,11 @@
+name: Feature
+description: Create a feature
+labels: ["feature"]
+projects: ["idn-au/3"]
+body:
+- type: textarea
+  attributes:
+    label: Feature description
+    description: A description of the feature.
+  validations:
+    required: false

@@ -1,0 +1,9 @@
+name: Blank Issue
+description: Create a blank issue
+projects: ["idn-au/3"]
+body:
+- type: textarea
+  attributes:
+    label: Description
+  validations:
+    required: false
