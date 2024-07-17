@@ -3,8 +3,8 @@ name: Sync labels across all existing repos
 on:
   workflow_dispatch: # manually triggered
 
-# will need token scopes for updating/deleting labels in repos?
-# permissions:
+permissions:
+  issues: write
 
 jobs:
   sync:
