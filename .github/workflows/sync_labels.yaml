@@ -18,7 +18,9 @@ jobs:
           for repo in $REPOS; do
             if [ $repo != ".github" ]; then
               labels=$(gh label list --repo idn-au/$repo --json name --jq '.[].name')
-              echo "${labels[@]}" | while read -r label; do gh label delete "$label" --repo idn-au/$repo --yes; done
+              if [ "${labels[@]}" != "" ]; then
+                echo "${labels[@]}" | while read -r label; do gh label delete "$label" --repo idn-au/$repo --yes; done
+              fi
               gh label clone idn-au/.github --repo idn-au/$repo
             fi
           done
