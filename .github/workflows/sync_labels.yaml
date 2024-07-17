@@ -12,15 +12,7 @@ jobs:
     env:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
       - name: Run label sync on each repo
-        run: |
-          REPOS=$(gh repo list idn-au --no-archived --limit 100 --json name --jq '.[].name')
-          for repo in $REPOS; do
-            if [ $repo != ".github" ]; then
-              labels=$(gh label list --repo idn-au/$repo --json name --jq '.[].name')
-              if [ "${labels[@]}" != "" ]; then
-                echo "${labels[@]}" | while read -r label; do gh label delete "$label" --repo idn-au/$repo --yes; done
-              fi
-              gh label clone idn-au/.github --repo idn-au/$repo
-            fi
-          done
+        run: sh sync.sh
