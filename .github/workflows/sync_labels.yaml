@@ -3,8 +3,7 @@ name: Sync labels across all existing repos
 on:
   workflow_dispatch: # manually triggered
 
-permissions:
-  issues: write
+permissions: write-all
 
 jobs:
   sync:
