@@ -1,3 +1,4 @@
+#!/bin/bash
 REPOS=$(gh repo list idn-au --no-archived --limit 100 --json name --jq '.[].name')
 for repo in $REPOS; do
     if [ $repo != ".github" ]; then
