@@ -1,0 +1,24 @@
+name: Sync labels across all existing repos
+
+on:
+  workflow_dispatch: # manually triggered
+
+# will need token scopes for updating/deleting labels in repos?
+# permissions:
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - name: Run label sync on each repo
+        run: |
+          REPOS=$(gh repo list idn-au --no-archived --limit 100 --json name --jq '.[].name')
+          for repo in $REPOS; do
+            if [ $repo != ".github" ]; then
+              labels=$(gh label list --repo idn-au/$repo --json name --jq '.[].name')
+              echo "${labels[@]}" | while read -r label; do gh label delete "$label" --repo idn-au/$repo --yes; done
+              gh label clone idn-au/.github --repo idn-au/$repo
+            fi
+          done
