@@ -1,9 +1,10 @@
-#!/bin/sh
+#!/bin/bash
 REPOS=$(gh repo list idn-au --no-archived --limit 100 --json name --jq '.[].name')
 for repo in $REPOS; do
     if [ $repo != ".github" ]; then
         echo "Labels in $repo:"
         labels=$(gh label list --repo idn-au/$repo --json name --jq '.[].name')
+        echo $labels
         if [ "${labels[@]}" != "" ]; then
             echo "${labels[@]}"
             echo "Deleting current labels..."
