@@ -15,4 +15,4 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Run label sync on each repo
-        run: sh sync.sh
+        run: ./sync.sh
