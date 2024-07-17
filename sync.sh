@@ -3,8 +3,8 @@ for repo in $REPOS; do
     if [ $repo != ".github" ]; then
         echo "Labels in $repo:"
         labels=$(gh label list --repo idn-au/$repo --json name --jq '.[].name')
-        echo "${labels[@]}"
         if [ "${labels[@]}" != "" ]; then
+            echo "${labels[@]}"
             echo "Deleting current labels..."
             echo "${labels[@]}" | while read -r label; do
                 gh label delete "$label" --repo idn-au/$repo --yes
