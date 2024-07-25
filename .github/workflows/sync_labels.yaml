@@ -24,6 +24,7 @@ jobs:
         with:
           app-id: ${{ vars.APP_ID }}
           private-key: ${{ secrets.APP_PRIVATE_KEY }}
+          owner: idn-au
       - name: Run label sync script
         env:
           GH_TOKEN: ${{ steps.generate-token.outputs.token }}
