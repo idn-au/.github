@@ -1,0 +1,30 @@
+name: Syncs labels in this repo with all repos in org
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 8 * * *" # daily at 8am UTC/6pm AEST
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.12'
+      - name: Install Poetry
+        uses: snok/install-poetry@v1
+      - name: Install dependencies
+        run: poetry install --no-interaction --no-root
+      - name: Generate access token
+        id: generate-token
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ vars.APP_ID }}
+          private-key: ${{ secrets.APP_PRIVATE_KEY }}
+      - name: Run label sync script
+        env:
+          GH_TOKEN: ${{ steps.generate-token.outputs.token }}
+        run: poetry run python sync.py
